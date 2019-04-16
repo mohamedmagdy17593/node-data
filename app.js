@@ -1,11 +1,14 @@
 const express = require('express')
+const compression = require('compression')
 const app = express()
+
+app.use(compression())
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
   res.header(
     'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept',
+    'Origin, X-Requested-With, Content-Type, Accept'
   )
   next()
 })
@@ -13,8 +16,8 @@ app.use((req, res, next) => {
 const s1 = 10000
 const s2 = 10000
 
-const data = Array.from({length: s1}, (_, i) =>
-  Array.from({length: s2}, (_, j) => j),
+const data = Array.from({ length: s1 }, (_, i) =>
+  Array.from({ length: s2 }, (_, j) => j)
 )
 
 console.log(data.length)
@@ -24,4 +27,4 @@ app.get('/', (req, res) => {
   res.json(data)
 })
 
-app.listen(3000, () => console.log('server started'))
+app.listen(3030, () => console.log('server started'))
